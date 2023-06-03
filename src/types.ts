@@ -1,6 +1,6 @@
-import { Record as PocketBaseRecord } from "pocketbase-react";
+import { Record as PocketBaseRecord } from 'pocketbase-react/src';
 
-type ReferenceTo<T> = string;
+export type ReferenceTo<T> = string;
 
 export type GameState = PocketBaseRecord & {
     currentGameNo: number,

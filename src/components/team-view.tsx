@@ -19,9 +19,12 @@ export const TeamView: React.FC<TeamProps> = props => {
     } = props;
 
     const members = useMemo(() => {
-        const array =  players.filter(player => player.team === team.id).sort((a, b) => a.goals.length - b.goals.length);
-        return new Set(array);
+        return players.filter(player => player.team === team.id).sort((a, b) => a.goals.length - b.goals.length);
     }, [players, team.id]);
+
+    const totalGoals = useMemo(() => {
+        return members.map(m => m.goals.length).reduce((prev, curr) => prev + curr);
+    }, [members]);
 
     return (
         <Card className='my-3'>
@@ -29,11 +32,15 @@ export const TeamView: React.FC<TeamProps> = props => {
             <Card.Body className='pb-0'>
                 <Table>
                     <tbody>
-                        {[...members.values()].map((member, idx) => (
-                            <PlayerRow player={member} last={idx === members.size-1} key={member.id}/>
+                        {members.map((member, idx) => (
+                            <PlayerRow player={member} last={idx === members.length-1} key={member.id}/>
                         ))}
                     </tbody>
                     <tfoot>
+                        <tr style={teamPointsInlineStyle}>
+                            <td><b>Góly týmu:</b></td>
+                            <td><b>{totalGoals}</b></td>
+                        </tr>
                         <tr style={teamPointsInlineStyle}>
                             <td><b>Body týmu:</b></td>
                             <td><b>{team.points}</b></td>

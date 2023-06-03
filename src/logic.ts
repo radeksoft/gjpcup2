@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
-import { useAppContent } from 'pocketbase-react';
-import { Game, GameState, Player, Team } from './types';
+import { useAppContent } from 'pocketbase-react/src';
+import { Game, GameState, Goal, Player, Team } from './types';
 
 export const useGameLogic = () => {
     // add new ones to `subs` in the `useEffect` below!
@@ -8,12 +8,14 @@ export const useGameLogic = () => {
     const players = useAppContent<Player>('players', true);
     const games = useAppContent<Game>('games', true);
     const teams = useAppContent<Team>('teams', true);
+    const goals = useAppContent<Goal>('goals', true);
 
-    console.log({games, players, teams});
+    // console.log({games, players, teams});
 
     // there's only one (we hope)
+    console.log({gameMisc});
     const gameState = gameMisc.records[0];
-    console.log({gameMisc, gameState});
+    // console.log({gameMisc, gameState});
 
     const currentGame = useMemo(() => {
         const game = games.records?.find(g => g.no === gameState.currentGameNo);
@@ -27,16 +29,6 @@ export const useGameLogic = () => {
         };
     }, [games.records, gameState.currentGameNo, teams.records]);
 
-    useEffect(() => {
-        const subs = [gameMisc, players, games, teams, gameMisc];
-
-        subs.forEach(sub => sub.actions.subscribe());
-
-        return () => {
-            subs.forEach(sub => sub.actions.unsubscribe());
-        };
-    }, []);
-
     return {
         gameState,
         currentGame,
@@ -44,6 +36,7 @@ export const useGameLogic = () => {
         players: players.records,
         games: games.records,
         teams: teams.records,
+        goals: goals.records,
 
         addPlayer: players.actions.create,
     };

@@ -1,0 +1,16 @@
+.goal-row:last-of-type {
+    border-bottom: none;
+}
+
+.goal-row td {
+    border-left: none;
+    border-right: none;
+}
+
+.goal-row:last-of-type td:first-of-type {
+    border-bottom-left-radius: 6px;
+}
+
+.goal-row:last-of-type td:last-of-type {
+    border-bottom-right-radius: 6px;
+}

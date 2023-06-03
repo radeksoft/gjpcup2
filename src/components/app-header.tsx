@@ -15,7 +15,7 @@ export const AppHeader: React.FC = () => {
                     <Nav className="me-auto">
                         <Link href='/'><Nav.Link>Hlavní stránka</Nav.Link></Link>
                         <Link href='/teams'><Nav.Link>Týmy a hráči</Nav.Link></Link>
-                        <Link href='/matches'><Nav.Link>Všechny zápasy</Nav.Link></Link>
+                        <Link href='/games'><Nav.Link>Všechny zápasy</Nav.Link></Link>
                         <Link href='/stats'><Nav.Link>Velká tabulka</Nav.Link></Link>
                         <Link href='/bufet'><Nav.Link>Bufet</Nav.Link></Link>
                         <Link href='/vote'><Nav.Link>Hlasování</Nav.Link></Link>

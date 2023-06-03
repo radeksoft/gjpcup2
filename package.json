@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
-    "pocketbase-react": "^0.1.28",
+    "pocketbase-react": "radeksoft/pocketbase-react#radeksoft",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
