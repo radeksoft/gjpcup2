@@ -40,6 +40,11 @@ export const useGameLogic = () => {
     return {
         gameState,
         currentGame,
+
         players: players.records,
+        games: games.records,
+        teams: teams.records,
+
+        addPlayer: players.actions.create,
     };
 };

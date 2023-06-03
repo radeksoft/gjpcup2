@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { Pocketbase as PocketbaseProvider } from 'pocketbase-react';
 import { Router } from './pages/_router';
+import { AppHeader } from './components/app-header';
 
 const serverURL = "http://127.0.0.1:8090";
 // const collections = ['games', 'goals', 'players', 'teams', 'misc'];
@@ -19,7 +20,8 @@ const App: React.FC = () => {
                 // for example expo WebBrowser
             }}
         >
-            <div className="d-flex justify-content-center">
+            <div className="d-flex flex-column align-items-center justify-content-start">
+                <AppHeader />
                 <div style={{maxWidth: 600, width: '100%'}}>
                     <Router />
                 </div>
