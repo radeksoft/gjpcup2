@@ -3,6 +3,7 @@ import { Record as PocketBaseRecord } from 'pocketbase-react/src';
 export type ReferenceTo<T> = string;
 
 export type GameState = PocketBaseRecord & {
+    matchStarted: boolean,
     currentGameNo: number,
 };
 

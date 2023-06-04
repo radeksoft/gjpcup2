@@ -38,6 +38,10 @@ export const useGameLogic = () => {
         teams: teams.records,
         goals: goals.records,
 
-        addPlayer: players.actions.create,
+        playersActions: players.actions,
+        gamesActions: games.actions,
+        teamsActions: teams.actions,
+        goalsActions: goals.actions,
+        gameMiscActions: gameMisc.actions,
     };
 };

@@ -8,7 +8,10 @@ export const AdminRouter: React.FC = () => {
     const { user, isSignedIn, actions } = useAuth();
     console.log({user, isSignedIn, actions});
 
-    if (!isSignedIn) {
+    if (isSignedIn === null)
+        return null;
+
+    if (isSignedIn === false) {
         return (
             <Switch>
                 <Route path="/admin/login" component={AdminLoginPage} />
