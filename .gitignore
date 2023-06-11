@@ -27,3 +27,11 @@ dist-ssr
 pocketbase
 pb_data/
 pb_migrations/
+
+# env
+.env
+.env.local
+.env.*
+
+# scripts data
+tymy.csv

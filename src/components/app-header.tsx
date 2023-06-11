@@ -16,9 +16,9 @@ export const AppHeader: React.FC = () => {
                         <Link href='/'><Nav.Link>Hlavní stránka</Nav.Link></Link>
                         <Link href='/teams'><Nav.Link>Týmy a hráči</Nav.Link></Link>
                         <Link href='/games'><Nav.Link>Všechny zápasy</Nav.Link></Link>
-                        <Link href='/stats'><Nav.Link>Velká tabulka</Nav.Link></Link>
+                        <Link href='/table'><Nav.Link>Velká tabulka</Nav.Link></Link>
                         <Link href='/bufet'><Nav.Link>Bufet</Nav.Link></Link>
-                        <Link href='/vote'><Nav.Link>Hlasování</Nav.Link></Link>
+                        <Link href='/voting'><Nav.Link>Hlasování</Nav.Link></Link>
                         <Link href='/admin'><Nav.Link>Admin</Nav.Link></Link>
                     </Nav>
                 </Navbar.Collapse>

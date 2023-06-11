@@ -23,7 +23,7 @@ export const TeamView: React.FC<TeamProps> = props => {
     }, [players, team.id]);
 
     const totalGoals = useMemo(() => {
-        return members.map(m => m.goals.length).reduce((prev, curr) => prev + curr);
+        return members.map(m => m.goals.length).reduce((prev, curr) => prev + curr, 0);
     }, [members]);
 
     return (

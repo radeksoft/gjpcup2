@@ -9,7 +9,14 @@ const vsInlineStyle: React.CSSProperties = {
 };
 
 export const CurrentMatch: React.FC = () => {
-    const { currentGame: { game, team1, team2 } } = useGameLogic();
+    const { currentGame: { game, team1, team2 }, gameState: { matchStarted } } = useGameLogic();
+
+    if (!matchStarted) {
+        return (
+            <p>za chvíli začínáme! TODO: show just following games</p>
+        )
+    }
+
 
     if (!game || !team1 || !team2) {
         return (

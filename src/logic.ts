@@ -29,6 +29,13 @@ export const useGameLogic = () => {
         };
     }, [games.records, gameState.currentGameNo, teams.records]);
 
+    const getGameByTeams = (team1: Team, team2: Team) => {
+        return games.records.find(game => (
+            (game.team1 == team1.id || game.team1 == team2.id) &&
+            (game.team2 == team1.id || game.team2 == team2.id)
+        ));
+    };
+
     return {
         gameState,
         currentGame,
@@ -43,5 +50,7 @@ export const useGameLogic = () => {
         teamsActions: teams.actions,
         goalsActions: goals.actions,
         gameMiscActions: gameMisc.actions,
+
+        getGameByTeams,
     };
 };

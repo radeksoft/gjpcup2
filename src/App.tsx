@@ -7,7 +7,7 @@ import './style.css';
 import { useAppContent } from 'pocketbase-react/src';
 import { Game, GameState, Goal, Player, Team } from './types';
 
-const serverURL = "http://127.0.0.1:8090";
+const serverURL = import.meta.env.VITE_POCKETBASE_ENDPOINT;
 // these get automatically prefetched & subscribed to updates
 const collections = ['games', 'goals', 'players', 'teams', 'misc'];
 const webRedirectURL = "mariansam.eu/webred";
