@@ -12,7 +12,15 @@ const vsInlineStyle: React.CSSProperties = {
     fontSize: 20,
 };
 
-export const CurrentMatch: React.FC = () => {
+type CurrentMatchProps = {
+    bigTitle?: true,
+};
+
+export const CurrentMatch: React.FC<CurrentMatchProps> = (props) => {
+    const {
+        bigTitle,
+    } = props;
+
     const { currentGame: { game, team1, team2 }, gameState: { matchStarted } } = useGameLogic();
 
     if (!matchStarted) {
@@ -29,8 +37,8 @@ export const CurrentMatch: React.FC = () => {
     }
 
     return (
-        <Card className='text-center mb-4'>
-            <Card.Header>Probíhající zápas ({game.no + 1}. z 45)</Card.Header>
+        <Card className={bigTitle ? 'text-center my-5 border border-secondary border-4' : 'text-center mb-4'}>
+            <Card.Header className={bigTitle ? 'fw-bold fs-3' : ''}>Probíhající zápas ({game.no + 1}. z 45)</Card.Header>
             <Card.Body className='d-flex flex-row justify-content-around' style={{marginBottom: -10}}>
                 <Row className='w-100'>
                     <Col xs={5}>

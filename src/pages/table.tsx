@@ -19,7 +19,7 @@ export const TablePage: React.FC = () => {
                 <tr>
                     <th style={{width: 120}}>levý : horní</th>
                     {teams.map(team => (
-                        <th key={team.id ?? team.name}>{team.name}</th>
+                        <th style={{width: 90}} key={team.id ?? team.name}>{team.name}</th>
                     ))}
                 </tr>
             </thead>
@@ -54,10 +54,10 @@ const GameCell: React.FC<GameCellProps> = props => {
     } = useGameLogic();
 
     const game = useMemo(() => {
-        // console.log({teamLeft, teamTop});
-        // console.log('useMemo game');
+        if (teamLeft.id === teamTop.id)
+            return;
+
         const theGame = getGameByTeams(teamLeft, teamTop);
-        // console.log({theGame});
         return theGame;
     }, [teamLeft, teamTop, getGameByTeams]);
 
