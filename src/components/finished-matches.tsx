@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import { useGameLogic } from '../logic';
-import { Game } from '../types';
+import type { Game } from '../types';
 import { GoalRow } from './goal-row';
 
 export const FinishedMatches: React.FC = () => {

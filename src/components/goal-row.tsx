@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Goal, ReferenceTo } from '../types';
+import type { Goal, ReferenceTo } from '../types';
 import { useGameLogic } from '../logic';
 
 type GoalRowProps = {

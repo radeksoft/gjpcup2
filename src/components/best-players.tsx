@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
-import {useGameLogic} from '../logic';
-import { Player } from '../types';
+import { useGameLogic } from '../logic';
+import type { Player } from '../types';
 
 export const BestPlayers: React.FC = () => {
     const {

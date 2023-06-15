@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { Table } from "react-bootstrap";
-import {Team} from '../types';
+import React, { useEffect, useMemo } from 'react';
+import Table from "react-bootstrap/Table";
+import type { Team } from '../types';
 import { useGameLogic } from '../logic';
 
 export const TablePage: React.FC = () => {
@@ -49,7 +49,6 @@ const GameCell: React.FC<GameCellProps> = props => {
     } = props;
 
     const {
-        games,
         gameState,
         getGameByTeams,
     } = useGameLogic();
@@ -60,7 +59,7 @@ const GameCell: React.FC<GameCellProps> = props => {
         const theGame = getGameByTeams(teamLeft, teamTop);
         // console.log({theGame});
         return theGame;
-    }, [teamLeft, teamTop, games]);
+    }, [teamLeft, teamTop, getGameByTeams]);
 
     const pointsLeft = useMemo(() => {
         if (!game)
@@ -80,7 +79,7 @@ const GameCell: React.FC<GameCellProps> = props => {
             return game.goals1;
         else
             return game.goals2;
-    }, [teamLeft, game]);
+    }, [teamTop, game]);
 
     if (!game || !gameState)
         return (<td>-</td>);

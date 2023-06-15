@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
-import { Card } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
 import { useGameLogic } from '../logic';
-import { Team } from '../types';
 
 export const NextMatch: React.FC = () => {
     const {

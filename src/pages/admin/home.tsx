@@ -1,19 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import FormControl from 'react-bootstrap/FormControl';
-import InputGroup from 'react-bootstrap/InputGroup';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
-// import { useAuthState } from 'react-firebase-hooks/auth';
-// import { useDocumentData } from 'react-firebase-hooks/firestore';
-// import { AdminGoalInput } from '../../components/admin-goal-input';
-// import { AdminTeamInput } from '../../components/admin-team-input';
-// import { FutureMatches } from '../../components/future-matches';
 import { GoalRow } from '../../components/goal-row';
 
-import { Team } from '../../types';
 import { useGameLogic } from '../../logic';
 import { useAdminLogic } from '../../admin-logic';
 import { AdminGoalInput } from '../../components/admin/goal-input';

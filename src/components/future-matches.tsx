@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
-import { Card } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
 import { useGameLogic } from '../logic';
-import {Game, Team} from '../types';
+import type {Game, Team} from '../types';
 
 type FutureMatchesProps = {
     limit?: number,

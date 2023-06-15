@@ -1,10 +1,8 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Stack from 'react-bootstrap/Stack';
-import {Game, Player, Team} from '../../types';
+import type { Game, Team } from '../../types';
 import { useGameLogic } from '../../logic';
 import { useAdminLogic } from '../../admin-logic';
 

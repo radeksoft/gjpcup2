@@ -2,8 +2,9 @@ import React, { useMemo } from 'react';
 import { useGameLogic } from '../logic';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import { GoalRow } from './goal-row';
-import { Col, Row } from 'react-bootstrap';
 
 const vsInlineStyle: React.CSSProperties = {
     marginTop: 'auto',

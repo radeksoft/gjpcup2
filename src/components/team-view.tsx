@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
-import { Container, Card, Table } from 'react-bootstrap';
-import { Player, Team } from '../types';
+import Card from 'react-bootstrap/Card';
+import Table from 'react-bootstrap/Table';
+import type { Player, Team } from '../types';
 import { useGameLogic } from '../logic';
 
 const teamPointsInlineStyle: React.CSSProperties = {
