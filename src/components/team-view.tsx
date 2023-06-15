@@ -39,12 +39,12 @@ export const TeamView: React.FC<TeamProps> = props => {
                     </tbody>
                     <tfoot>
                         <tr style={teamPointsInlineStyle}>
-                            <td><b>Góly týmu:</b></td>
-                            <td><b>{totalGoals}</b></td>
+                            <td className='w-75'><b>Góly týmu:</b></td>
+                            <td className='w-25'><b>{totalGoals}</b></td>
                         </tr>
                         <tr style={teamPointsInlineStyle}>
-                            <td><b>Body týmu:</b></td>
-                            <td><b>{team.points}</b></td>
+                            <td className='w-75'><b>Body týmu:</b></td>
+                            <td className='w-25'><b>{team.points}</b></td>
                         </tr>
                     </tfoot>
                 </Table>
@@ -63,8 +63,8 @@ const PlayerRow: React.FC<PlayerRowProps> = props => {
 
     return (
         <tr style={last ? { borderBottomColor: 'black' } : undefined}>
-            <td>{player.name}</td>
-            <td>{player.goals.length}</td>
+            <td className='w-75'>{player.name}</td>
+            <td className='w-25'>{player.goals.length}</td>
         </tr>
     );
 };
