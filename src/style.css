@@ -14,3 +14,13 @@
 .goal-row:last-of-type td:last-of-type {
     border-bottom-right-radius: 6px;
 }
+
+
+
+.best-players-table tr:last-of-type {
+    border: none;
+}
+
+.best-players-table tr:last-of-type td {
+    border: none;
+}

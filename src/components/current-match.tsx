@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 import { useGameLogic } from '../logic';
 import Card from 'react-bootstrap/Card';
+import Table from 'react-bootstrap/Table';
+import { GoalRow } from './goal-row';
 
 const vsInlineStyle: React.CSSProperties = {
     marginTop: 'auto',
@@ -40,6 +42,15 @@ export const CurrentMatch: React.FC = () => {
                     <Card.Text style={{fontSize: 80, fontWeight: 600, marginTop: -25}} >{game.goals2}</Card.Text>
                 </div>
             </Card.Body>
+            {!!game.goals.length && (
+                <Table bordered style={{tableLayout: 'fixed', marginBottom: 0, marginRight: 0}}>
+                    <tbody>
+                        {game.goals.map(goal => (
+                            <GoalRow goalId={goal} key={goal} />
+                        ))}
+                    </tbody>
+                </Table>
+            )}
         </Card>
     );
 };

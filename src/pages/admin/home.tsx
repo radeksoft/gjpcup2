@@ -110,7 +110,7 @@ export const AdminHomePage: React.FC = () => {
             {!gameState.matchStarted && (
                 <div>
                     <Button variant="success" onClick={() => { startMatchFromStart(); setShowGameNo(0); }}>START MATCH 0</Button>
-                    <Button variant="success" onClick={() => startMatchFromStart()}>START MATCH {showGameNo}</Button>
+                    <Button variant="success" onClick={() => startMatchFromNo(showGameNo)}>START MATCH {showGameNo}</Button>
                 </div>
             )}
             <Stack direction="horizontal" className="px-2 mb-4">

@@ -42,15 +42,11 @@ const GameView: React.FC<MatchProps> = props => {
         game,
     } = props;
 
-    const { teams } = useGameLogic();
+    const { getTeamsByGame } = useGameLogic();
 
-    const team1 = useMemo(() => {
-        return teams.find(t => t.id === game.team1);
-    }, [teams, game]);
-
-    const team2 = useMemo(() => {
-        return teams.find(t => t.id === game.team2);
-    }, [teams, game]);
+    const { team1, team2 } = useMemo(() => {
+        return getTeamsByGame(game);
+    }, [game, getTeamsByGame]);
 
     if (!team1 || !team2)
         return null;

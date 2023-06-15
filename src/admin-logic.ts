@@ -1,5 +1,5 @@
 import { useGameLogic } from "./logic";
-import { Game, Goal, Player, ReferenceTo, Team } from "./types";
+import { Game, GameState, Goal, Player, ReferenceTo, Team } from "./types";
 
 export const useAdminLogic = () => {
     const {
@@ -19,22 +19,23 @@ export const useAdminLogic = () => {
     } = useGameLogic();
 
     const startMatchFromStart = () => {
-        gameMiscActions.update(gameState.id!, {
+        gameMiscActions.update(gameState.id as ReferenceTo<GameState>, {
             matchStarted: true,
             currentGameNo: 0,
         });
     };
 
     const startMatchFromNo = (no: number) => {
-        gameMiscActions.update(gameState.id!, {
+        gameMiscActions.update(gameState.id as ReferenceTo<GameState>, {
             matchStarted: true,
             currentGameNo: no,
         });
     };
 
     const startGameNo = (no: number) => {
-        gameMiscActions.update(gameState.id!, {
+        gameMiscActions.update(gameState.id as ReferenceTo<GameState>, {
             currentGameNo: no,
+            currentGameStart: new Date(),
         });
     };
 
@@ -46,6 +47,7 @@ export const useAdminLogic = () => {
             minute,
             side,
         } as Partial<Goal>) as Promise<void | Goal | undefined>);
+
         if (!theGoal || !theGoal.id)
             return;
 
@@ -64,13 +66,13 @@ export const useAdminLogic = () => {
             };
         }
 
-        gamesActions.update(game.id, gameObjChange);
-        playersActions.update(player.id, { goals: [...player.goals, theGoal.id] } as Partial<Player>);
+        gamesActions.update(game.id as ReferenceTo<Game>, gameObjChange);
+        playersActions.update(player.id as ReferenceTo<Player>, { goals: [...player.goals, theGoal.id] } as Partial<Player>);
     };
 
     const savePoints = (team1: Team, team2: Team, newPoints1: number, newPoints2: number) => {
-        teamsActions.update(team1.id, { points: team1.points + newPoints1 } as Partial<Team>);
-        teamsActions.update(team2.id, { points: team2.points + newPoints2 } as Partial<Team>);
+        teamsActions.update(team1.id as ReferenceTo<Player>, { points: team1.points + newPoints1 } as Partial<Team>);
+        teamsActions.update(team2.id as ReferenceTo<Player>, { points: team2.points + newPoints2 } as Partial<Team>);
     };
 
     return {

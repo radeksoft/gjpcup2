@@ -5,6 +5,8 @@ export type ReferenceTo<T> = string;
 export type GameState = PocketBaseRecord & {
     matchStarted: boolean,
     currentGameNo: number,
+    gameDuration: number,
+    currentGameStart: Date,
 };
 
 export type Game = PocketBaseRecord & {
@@ -14,8 +16,6 @@ export type Game = PocketBaseRecord & {
     goals2: number,
     team1: ReferenceTo<Team>,
     team2: ReferenceTo<Team>,
-    timeStart: Date,
-    timeEnd: Date,
     goals: ReferenceTo<Goal>[],
 }
 
@@ -38,4 +38,8 @@ export type Player = PocketBaseRecord & {
     name: string,
     goals: ReferenceTo<Goal>[],
     team: ReferenceTo<Team>,
+};
+
+export type News = PocketBaseRecord & {
+    text: string,
 };

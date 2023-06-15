@@ -30,7 +30,7 @@ export const GoalRow: React.FC<GoalRowProps> = props => {
 
     if (goal.side === 1) {
         return (
-            <tr>
+            <tr className="goal-row">
                 <td className="table-active" style={small && {fontSize: 13, padding: 4}}>
                     <strong>{player.name}</strong>
                     <br />
