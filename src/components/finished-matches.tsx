@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table';
 import { useGameLogic } from '../logic';
 import type { Game } from '../types';
 import { GoalRow } from './goal-row';
+import { Col, Row } from 'react-bootstrap';
 
 export const FinishedMatches: React.FC = () => {
     const {
@@ -54,17 +55,21 @@ const GameView: React.FC<MatchProps> = props => {
     return (
         <Card className='text-center' style={{marginBottom: 32}}>
             <Card.Body className='d-flex flex-row justify-content-around' style={{marginBottom: -10}}>
-                <div className='d-flex flex-column flex-grow-1'>
-                    <Card.Text style={{fontSize: 25}}>{team1.name}</Card.Text>
-                    <Card.Text style={{fontSize: 50, fontWeight: 600, marginTop: -25}} >{game.goals1}</Card.Text>
-                </div>
+                <Row className='w-100'>
+                    <Col xs={5}>
+                        <Card.Text style={{fontSize: 25}}>{team1.name}</Card.Text>
+                        <Card.Text style={{fontSize: 50, fontWeight: 600, marginTop: -25}}>{game.goals1}</Card.Text>
+                    </Col>
 
-                <Card.Text style={vsInlineStyle}>vs</Card.Text>
+                    <Col xs={2} className='my-auto'>
+                        <Card.Text style={vsInlineStyle}>vs</Card.Text>
+                    </Col>
 
-                <div className='d-flex flex-column flex-grow-1'>
-                    <Card.Text style={{fontSize: 25}}>{team2.name}</Card.Text>
-                    <Card.Text style={{fontSize: 50, fontWeight: 600, marginTop: -25}} >{game.goals2}</Card.Text>
-                </div>
+                    <Col xs={5}>
+                        <Card.Text style={{fontSize: 25}}>{team2.name}</Card.Text>
+                        <Card.Text style={{fontSize: 50, fontWeight: 600, marginTop: -25}}>{game.goals2}</Card.Text>
+                    </Col>
+                </Row>
             </Card.Body>
             {!!game.goals.length && (
                 <Table bordered style={{tableLayout: 'fixed', marginBottom: 0, marginRight: 0}}>

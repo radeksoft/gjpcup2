@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useGameLogic } from '../logic';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
@@ -35,7 +35,7 @@ export const CurrentMatch: React.FC = () => {
                 <Row className='w-100'>
                     <Col xs={5}>
                         <Card.Text style={{fontSize: 30}}>{team1.name}</Card.Text>
-                        <Card.Text style={{fontSize: 80, fontWeight: 600, marginTop: -25}} >{game.goals1}</Card.Text>
+                        <Card.Text style={{fontSize: 80, fontWeight: 600, marginTop: -25}}>{game.goals1}</Card.Text>
                     </Col>
 
                     <Col xs={2} className='my-auto'>
@@ -45,7 +45,7 @@ export const CurrentMatch: React.FC = () => {
 
                     <Col xs={5}>
                         <Card.Text style={{fontSize: 30}}>{team2.name}</Card.Text>
-                        <Card.Text style={{fontSize: 80, fontWeight: 600, marginTop: -25}} >{game.goals2}</Card.Text>
+                        <Card.Text style={{fontSize: 80, fontWeight: 600, marginTop: -25}}>{game.goals2}</Card.Text>
                     </Col>
                 </Row>
             </Card.Body>
