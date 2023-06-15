@@ -23,17 +23,13 @@ export const CurrentMatch: React.FC<CurrentMatchProps> = (props) => {
 
     const { currentGame: { game, team1, team2 }, gameState: { matchStarted } } = useGameLogic();
 
-    if (!matchStarted) {
-        return (
-            <p>za chvíli začínáme! TODO: show just following games</p>
-        )
-    }
+    if (!matchStarted)
+        return null;
 
 
     if (!game || !team1 || !team2) {
-        return (
-            <p>we got no game, preparing</p>
-        )
+        console.error('CurrentMatch: missing data', {game, team1, team2});
+        return null;
     }
 
     return (

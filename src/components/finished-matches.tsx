@@ -17,6 +17,9 @@ export const FinishedMatches: React.FC = () => {
         return filtered;
     }, [games, gameState]);
 
+    if (!finishedGames || !finishedGames.length)
+        return null;
+
     return (
         <div>
             <h3 className="text-center mb-3">Dohrané zápasy</h3>

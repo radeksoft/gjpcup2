@@ -7,6 +7,7 @@ export type GameState = PocketBaseRecord & {
     currentGameNo: number,
     gameDuration: number,
     currentGameStart: Date,
+    revealTeachers: boolean,
 };
 
 export type Game = PocketBaseRecord & {
@@ -24,6 +25,7 @@ export type Team = PocketBaseRecord & {
     name: string,
     points: number,
     members: ReferenceTo<Player>[],
+    teachers: boolean,
 };
 
 export type Goal = PocketBaseRecord & {

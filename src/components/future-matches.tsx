@@ -18,11 +18,13 @@ export const FutureMatches: React.FC<FutureMatchesProps> = props => {
     } = useGameLogic();
 
     const upcomingGames = useMemo(() => {
+        // we want to show the first game when match not started
+        const offset = gameState.matchStarted ? 0 : 1;
         if (limit) {
-            const upGames = games.filter(g => g.no > gameState.currentGameNo).slice(0, limit);
+            const upGames = games.filter(g => g.no+offset > gameState.currentGameNo).slice(0, limit);
             return upGames;
         } else {
-            const upGames = games.filter(g => g.no > gameState.currentGameNo);
+            const upGames = games.filter(g => g.no+offset > gameState.currentGameNo);
             return upGames;
         }
     }, [games, gameState, limit]);

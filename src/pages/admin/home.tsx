@@ -5,7 +5,7 @@ import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
 import { GoalRow } from '../../components/goal-row';
 
-import { useGameLogic } from '../../logic';
+import { useGameLogic, PAGE_STYLE } from '../../logic';
 import { useAdminLogic } from '../../admin-logic';
 import { AdminGoalInput } from '../../components/admin/goal-input';
 
@@ -97,7 +97,7 @@ export const AdminHomePage: React.FC = () => {
     }
 
     return (
-        <div className="mt-3">
+        <div style={PAGE_STYLE} className="mt-3">
             {!gameState.matchStarted && (
                 <div>
                     <Button variant="success" onClick={() => { startMatchFromStart(); setShowGameNo(0); }}>START MATCH 0</Button>

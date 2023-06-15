@@ -73,3 +73,8 @@ export const useGameLogic = () => {
         getTeamsByGame,
     };
 };
+
+export const PAGE_STYLE: React.CSSProperties = {
+    width: '100%',
+    maxWidth: 800,
+};

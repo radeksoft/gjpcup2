@@ -27,9 +27,7 @@ export const App: React.FC = () => {
             <div className="d-flex flex-column align-items-center justify-content-start">
                 <AppHeader />
                 <PocketbaseDataLoader>
-                    <div style={{maxWidth: 600, width: '100%'}}>
-                        <Router />
-                    </div>
+                    <Router />
                 </PocketbaseDataLoader>
             </div>
         </PocketbaseProvider>

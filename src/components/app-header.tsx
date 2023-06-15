@@ -9,7 +9,7 @@ export const AppHeader: React.FC = () => {
     return (
         <Navbar expand="lg">
             <Container className='px-4 py-2'>
-                <Navbar.Brand href='/'>GJP Cup</Navbar.Brand>
+                <Link href='/'><Navbar.Brand>GJP Cup</Navbar.Brand></Link>
                 <Navbar.Toggle aria-controls='navbar'/>
                 <Navbar.Collapse id='navbar' className='justify-content-end'>
                     <Nav className="me-auto">

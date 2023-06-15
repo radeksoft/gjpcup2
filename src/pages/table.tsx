@@ -7,33 +7,44 @@ export const TablePage: React.FC = () => {
     const {
         games,
         teams,
+        gameState,
     } = useGameLogic();
 
     useEffect(() => {
         console.log({games, teams});
     }, [games, teams]);
 
+    const shownTeams = useMemo(() => {
+        if (gameState.revealTeachers) {
+            return teams;
+        } else {
+            return teams.filter(t => !t.teachers);
+        }
+    }, [teams, gameState]);
+
     return (
-        <Table responsive striped bordered hover size='sm' style={{tableLayout: 'fixed', width: 950}}>
-            <thead>
-                <tr>
-                    <th style={{width: 120}}>levý : horní</th>
-                    {teams.map(team => (
-                        <th style={{width: 90}} key={team.id ?? team.name}>{team.name}</th>
-                    ))}
-                </tr>
-            </thead>
-            <tbody>
-                {teams.map(teamLeft => (
-                    <tr key={teamLeft.id ?? teamLeft.name}>
-                        <th>{teamLeft.name}</th>
-                        {teams.map(teamTop => (
-                            <GameCell key={(teamLeft.id ?? teamLeft.name) + (teamTop.id ?? teamTop.name)} teamLeft={teamLeft} teamTop={teamTop} />
+        <div style={{width: '100%', maxWidth: 120+11*90+1}}>
+            <Table responsive striped bordered hover size='sm' style={{tableLayout: 'fixed'}}>
+                <thead>
+                    <tr>
+                        <th style={{width: 120}}>levý : horní</th>
+                        {shownTeams.map(team => (
+                            <th style={{width: 90}} key={team.id ?? team.name}>{team.name}</th>
                         ))}
                     </tr>
-                ))}
-            </tbody>
-        </Table>
+                </thead>
+                <tbody>
+                    {shownTeams.map(teamLeft => (
+                        <tr key={teamLeft.id ?? teamLeft.name}>
+                            <th>{teamLeft.name}</th>
+                            {shownTeams.map(teamTop => (
+                                <GameCell key={(teamLeft.id ?? teamLeft.name) + (teamTop.id ?? teamTop.name)} teamLeft={teamLeft} teamTop={teamTop} />
+                            ))}
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+        </div>
     );
 };
 
@@ -82,7 +93,10 @@ const GameCell: React.FC<GameCellProps> = props => {
     }, [teamTop, game]);
 
     if (!game || !gameState)
-        return (<td>-</td>);
+        return (<td className='table-secondary'></td>);
+
+    if (teamLeft.teachers || teamTop.teachers)
+        return (<td className='table-warning'></td>)
 
     if (gameState.currentGameNo == game.no) {
         return (

@@ -1,8 +1,9 @@
 import Card from 'react-bootstrap/Card';
+import { PAGE_STYLE } from '../logic';
 
 export const BufetPage: React.FC = () => {
     return (
-        <div>
+        <div style={PAGE_STYLE}>
             <Card className="m-4">
                 <Card.Header>Bufet</Card.Header>
 

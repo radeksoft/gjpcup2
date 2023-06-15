@@ -2,9 +2,10 @@ import React, { useMemo, useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Stack from 'react-bootstrap/Stack';
-import type { Game, Team } from '../../types';
+import type { Game, Player, ReferenceTo, Team } from '../../types';
 import { useGameLogic } from '../../logic';
 import { useAdminLogic } from '../../admin-logic';
+import { ButtonGroup } from 'react-bootstrap';
 
 type AdminGoalInputProps = {
     game: Game,
@@ -20,8 +21,7 @@ export const AdminGoalInput: React.FC<AdminGoalInputProps> = props => {
     } = props;
 
     const [minute, setMinute] = useState(1);
-
-    const userInputRef = useRef<HTMLSelectElement | null>();
+    const [player, setPlayer] = useState<Player>();
 
     const {
         players,
@@ -36,17 +36,8 @@ export const AdminGoalInput: React.FC<AdminGoalInputProps> = props => {
     }, [players, team]);
 
     const addGoal = async () => {
-        console.log({userInputRef});
-
-        if (!userInputRef.current)
-            return;
-
-        const selectedPlayerId = userInputRef.current.value;
-        const player = members.find(mem => mem.id === selectedPlayerId);
-        // const player = members.find(mem => mem.id === selectedPlayerId);
-
         if (!player) {
-            console.log('player not found wtf', selectedPlayerId);
+            console.error('you stupid');
             return;
         }
 
@@ -56,20 +47,23 @@ export const AdminGoalInput: React.FC<AdminGoalInputProps> = props => {
 
     return (
         <Stack gap={1}>
-            <InputGroup>
-                <Button variant="outline-secondary" onClick={() => setMinute(minute - 1)}>-</Button>
-                <InputGroup.Text className="flex-fill">{minute}. min</InputGroup.Text>
-                <Button variant="outline-secondary" onClick={() => setMinute(minute + 1)}>+</Button>
-            </InputGroup>
-            {members.length ? (
-                <select ref={ref => userInputRef.current = ref} style={{height: 50}}>
-                    {members.map(mem => (
-                        <option key={mem.id!} value={mem.id!}>{mem.name}</option>
-                    ))}
-                </select>
-            ) : (
-                <p>loading</p>
-            )}
+            <ButtonGroup>
+                {[1, 2, 3, 4, 5, 6, 7, 8].map(n => (
+                    <Button key={n} onClick={() => setMinute(n)} variant={n === minute ? 'primary' : 'secondary'}>{n}</Button>
+                ))}
+            </ButtonGroup>
+            <Stack>
+            {members.map(mem => (
+                <Button
+                    key={mem.id}
+                    className='m-0 p-1'
+                    onClick={() => setPlayer(mem)}
+                    variant={mem.id === player?.id ? 'primary' : 'secondary'}
+                >
+                    {mem.name}
+                </Button>
+            ))}
+            </Stack>
             <Button onClick={() => addGoal()}>Add Goal</Button>
         </Stack>
     );

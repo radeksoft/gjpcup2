@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { TeamView } from '../components/team-view';
-import { useGameLogic } from '../logic';
+import { PAGE_STYLE, useGameLogic } from '../logic';
 
 export const TeamsPage: React.FC = () => {
     const {
@@ -15,7 +15,7 @@ export const TeamsPage: React.FC = () => {
         return (<p>loading</p>);
 
     return (
-        <div>
+        <div style={PAGE_STYLE}>
             {teamsSorted.map(team => (
                 <TeamView team={team} key={team.name}/>
             ))}
