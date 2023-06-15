@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import Card from 'react-bootstrap/Card';
 import { useGameLogic } from '../logic';
-import type {Game, Team} from '../types';
+import type { Game } from '../types';
 
 type FutureMatchesProps = {
     limit?: number,
@@ -19,26 +19,36 @@ export const FutureMatches: React.FC<FutureMatchesProps> = props => {
 
     const upcomingGames = useMemo(() => {
         // we want to show the first game when match not started
-        const offset = gameState.matchStarted ? 0 : 1;
-        if (limit) {
-            const upGames = games.filter(g => g.no+offset > gameState.currentGameNo).slice(0, limit);
-            return upGames;
+
+        let gamesToShow: Game[] = [];
+
+        if (!gameState.revealTeachers) {
+            gamesToShow = games.slice(0, -1);
         } else {
-            const upGames = games.filter(g => g.no+offset > gameState.currentGameNo);
-            return upGames;
+            gamesToShow = games;
+        }
+
+        const offset = gameState.matchStarted ? 0 : 1;
+
+        if (limit) {
+            return gamesToShow.filter(g => g.no+offset > gameState.currentGameNo).slice(0, limit);
+        } else {
+            return gamesToShow.filter(g => g.no+offset > gameState.currentGameNo);
         }
     }, [games, gameState, limit]);
 
     return (
         <Card className='text-center mb-4'>
             <Card.Header>Nadcházející zápasy</Card.Header>
-            <Card.Body>
-                {upcomingGames.map((game, index) => (
+            <Card.Body className='py-1'>
+                {upcomingGames.length ? upcomingGames.map((game, index) => (
                     <>
                         <FutureMatch game={game} />
-                        {index !== upcomingGames.length - 1 && <hr/>}
+                        {index !== upcomingGames.length - 1 && <hr className='my-0' />}
                     </>
-                ))}
+                )) : (
+                    <p className='mt-3 fs-5'>vyhlášení :)</p>
+                )}
             </Card.Body>
         </Card>
     );
@@ -71,10 +81,33 @@ const FutureMatch: React.FC<FutureMatchProps> = props => {
         return formatted;
     }, [game, gameState, nextGameStart]);
 
+
+    // if (!team1 || !team2)
+    //     return null;
+        // return (<p>loading</p>);
+
+    if (gameState.revealTeachers && (team1?.teachers || team2?.teachers)) {
+        if (!team1)
+            return null;
+
+        if (!team2) {
+            return (
+                <Card.Text className='bg-warning bg-opacity-25 py-3 mb-3 rounded-bottom'>
+                    <strong>{team1.name}</strong> - <strong>vítězové</strong> asi v {gameStartFormatted}
+                </Card.Text>
+            )
+        }
+        return (
+            <Card.Text className='bg-warning bg-opacity-25 py-3 mb-3 rounded-bottom'>
+                <strong>{team1.name}</strong> - <strong>{team2.name}</strong> asi v {gameStartFormatted}
+            </Card.Text>
+        );
+    }
+
     if (!team1 || !team2)
-        return (<p>loading</p>);
+        return null;
 
     return (
-        <Card.Text><strong>{team1.name}</strong> - <strong>{team2.name}</strong> asi v {gameStartFormatted}</Card.Text>
+        <Card.Text className='my-3'><strong>{team1.name}</strong> - <strong>{team2.name}</strong> asi v {gameStartFormatted}</Card.Text>
     );
 };

@@ -8,6 +8,8 @@ assert(POCKETBASE_ENDPOINT, 'missing env var POCKETBASE_ENDPOINT');
 assert(POCKETBASE_ADMIN_EMAIL, 'missing env var POCKETBASE_ADMIN_EMAIL');
 assert(POCKETBASE_ADMIN_PASSWORD, 'missing env var POCKETBASE_ADMIN_PASSWORD');
 
+const TEACHERS_TEAM_ID = 'pg7a6r910fvfhlq';
+
 const pb = new PocketBase(POCKETBASE_ENDPOINT);
 await pb.admins.authWithPassword(POCKETBASE_ADMIN_EMAIL, POCKETBASE_ADMIN_PASSWORD);
 
@@ -15,13 +17,24 @@ const gamesColl = pb.collection('games');
 const games = await gamesColl.getFullList<Game>();
 
 for (const game of games) {
-    console.log('clearing game', game.id);
-    await gamesColl.update(game.id!, {
-        finished: false,
-        goals1: 0,
-        goals2: 0,
-        goals: [],
-    });
+    if (game.team1 == TEACHERS_TEAM_ID || game.team2 === TEACHERS_TEAM_ID) {
+        console.log('clearing teachers game', game.id);
+        await gamesColl.update(game.id!, {
+            finished: false,
+            team2: null,
+            goals1: 0,
+            goals2: 0,
+            goals: [],
+        });
+    } else {
+        console.log('clearing game', game.id);
+        await gamesColl.update(game.id!, {
+            finished: false,
+            goals1: 0,
+            goals2: 0,
+            goals: [],
+        });
+    }
 }
 console.log('========  GAMES CLEARED  ========');
 console.log();
@@ -48,6 +61,7 @@ await miscColl.update(gameState.id!, {
     matchStarted: false,
     gameDuration: 6.5,
     currentGameStart: null,
+    revealTeachers: false,
 });
 console.log('========  GAME STATE RESET  ========');
 console.log();
@@ -58,7 +72,7 @@ const playersColl = pb.collection('players');
 const players = await playersColl.getFullList<Player>();
 
 for (const player of players) {
-    console.log('clearing player', player.id);
+    console.log('clearing player', player.id, player.name);
     await playersColl.update(player.id!, {
         goals: [],
     });
@@ -72,7 +86,7 @@ const teamsColl = pb.collection('teams');
 const teams = await teamsColl.getFullList<Team>();
 
 for (const team of teams) {
-    console.log('clearing team', team.id);
+    console.log('clearing team', team.id, team.name);
     await teamsColl.update(team.id!, {
         points: 0,
     });

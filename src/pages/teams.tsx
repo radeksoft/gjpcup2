@@ -15,7 +15,7 @@ export const TeamsPage: React.FC = () => {
         return (<p>loading</p>);
 
     return (
-        <div style={PAGE_STYLE}>
+        <div style={{width: '100%', maxWidth: 600}}>
             {teamsSorted.map(team => (
                 <TeamView team={team} key={team.name}/>
             ))}

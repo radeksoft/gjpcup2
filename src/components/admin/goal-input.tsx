@@ -21,7 +21,7 @@ export const AdminGoalInput: React.FC<AdminGoalInputProps> = props => {
     } = props;
 
     const [minute, setMinute] = useState(1);
-    const [player, setPlayer] = useState<Player>();
+    const [playerId, setPlayerId] = useState<ReferenceTo<Player>>();
 
     const {
         players,
@@ -36,8 +36,14 @@ export const AdminGoalInput: React.FC<AdminGoalInputProps> = props => {
     }, [players, team]);
 
     const addGoal = async () => {
-        if (!player) {
+        if (!playerId) {
             console.error('you stupid');
+            return;
+        }
+
+        const player = members.find(m => m.id === playerId);
+        if (!player) {
+            console.error('no player by id', playerId, members);
             return;
         }
 
@@ -57,8 +63,8 @@ export const AdminGoalInput: React.FC<AdminGoalInputProps> = props => {
                 <Button
                     key={mem.id}
                     className='m-0 p-1'
-                    onClick={() => setPlayer(mem)}
-                    variant={mem.id === player?.id ? 'primary' : 'secondary'}
+                    onClick={() => setPlayerId(mem.id)}
+                    variant={mem.id === playerId ? 'primary' : 'secondary'}
                 >
                     {mem.name}
                 </Button>

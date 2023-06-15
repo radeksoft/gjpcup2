@@ -135,7 +135,7 @@ export const AdminHomePage: React.FC = () => {
                     <Table bordered style={{ tableLayout: 'fixed' }}>
                         <tbody>
                             {shownGame.goals.map(goalId => (
-                                <GoalRow goalId={goalId} />
+                                <GoalRow goalId={goalId} key={goalId} />
                             ))}
                             <tr>
                                 <td>

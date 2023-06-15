@@ -7,10 +7,10 @@ export const BufetPage: React.FC = () => {
             <Card className="m-4">
                 <Card.Header>Bufet</Card.Header>
 
-                <Card.Body>
+                <Card.Body style={{fontSize: 18}}>
                 <p className="pb-4">Bufet je otevřený! V nabídce najdete:</p>
 
-                <p>Whey protein - 3O Kč</p>
+                <p>Whey protein - 30 Kč</p>
                 <p>Párek v rohlíku - 20 Kč</p>
                 <p>Párek na tácku - 10 Kč</p>
                 <p>Toust - 20 Kč</p>

@@ -7,8 +7,16 @@ import { BestPlayers } from '../components/best-players';
 import { News } from '../components/news';
 
 export const HomePage: React.FC = () => {
+    const { gameState: { matchStarted } } = useGameLogic();
+
     return (
         <div style={PAGE_STYLE}>
+            {!matchStarted && (
+                <p className='fs-3'>
+                Vítejte na třetím ročníku legendárního futsálového turnaje GJP&nbsp;Cup. Udělejte si pohodlí, připravte se na hru a občerstvěte se v bufetu – za chvíli začínáme!
+                </p>
+            )}
+
             <CurrentMatch />
             <FutureMatches limit={6} />
             <BestPlayers />

@@ -22,6 +22,7 @@ export const useAdminLogic = () => {
         gameMiscActions.update(gameState.id as ReferenceTo<GameState>, {
             matchStarted: true,
             currentGameNo: 0,
+            currentGameStart: new Date(),
         });
     };
 
@@ -29,6 +30,7 @@ export const useAdminLogic = () => {
         gameMiscActions.update(gameState.id as ReferenceTo<GameState>, {
             matchStarted: true,
             currentGameNo: no,
+            currentGameStart: new Date(),
         });
     };
 
