@@ -89,9 +89,13 @@ export const AdminHomePage: React.FC = () => {
     const saveStartNext = async () => {
         if (!team1 || !team2 || !currentGame.game)
             return;
-        await savePoints(team1, team2, newPoints1, newPoints2);
-        await finishGame(currentGame.game);
-        await startGameNo(showGameNo + 1);
+
+        await Promise.all([
+            savePoints(team1, team2, newPoints1, newPoints2),
+            finishGame(currentGame.game),
+            startGameNo(showGameNo + 1),
+        ]);
+
         showNextGame();
     }
 
