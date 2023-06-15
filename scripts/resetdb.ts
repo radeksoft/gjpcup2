@@ -2,11 +2,18 @@ import assert from 'assert';
 import 'dotenv/config';
 import PocketBase from 'pocketbase';
 import type { Game, GameState, Goal, News, Player, Team } from '../src/types';
+import { confirm } from './util';
 
 const { POCKETBASE_ENDPOINT, POCKETBASE_ADMIN_EMAIL, POCKETBASE_ADMIN_PASSWORD } = process.env;
 assert(POCKETBASE_ENDPOINT, 'missing env var POCKETBASE_ENDPOINT');
 assert(POCKETBASE_ADMIN_EMAIL, 'missing env var POCKETBASE_ADMIN_EMAIL');
 assert(POCKETBASE_ADMIN_PASSWORD, 'missing env var POCKETBASE_ADMIN_PASSWORD');
+
+console.log(`Do you really want to reset the db at ${POCKETBASE_ENDPOINT}?`)
+console.warn('This will delete data!');
+console.log('Confirm with y<Enter>')
+if (!await confirm())
+    process.exit(1);
 
 const TEACHERS_TEAM_ID = 'pg7a6r910fvfhlq';
 
@@ -108,3 +115,4 @@ console.log();
 
 
 console.log('DONE');
+process.exit(0);

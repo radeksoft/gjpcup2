@@ -19,7 +19,6 @@ export const AppHeader: React.FC = () => {
                         <Link href='/table'><Nav.Link>Velká tabulka</Nav.Link></Link>
                         <Link href='/bufet'><Nav.Link>Bufet</Nav.Link></Link>
                         <Link href='/voting'><Nav.Link>Hlasování</Nav.Link></Link>
-                        <Link href='/admin'><Nav.Link>Admin</Nav.Link></Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

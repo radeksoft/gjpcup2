@@ -9,7 +9,8 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "filldb": "tsx --tsconfig ./tsconfig.node.json scripts/filldb.ts",
-    "resetdb": "tsx --tsconfig ./tsconfig.node.json scripts/resetdb.ts"
+    "resetdb": "tsx --tsconfig ./tsconfig.node.json scripts/resetdb.ts",
+    "stats": "tsx --tsconfig ./tsconfig.node.json scripts/stats.ts"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",

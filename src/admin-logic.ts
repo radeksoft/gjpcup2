@@ -18,24 +18,24 @@ export const useAdminLogic = () => {
         gameMiscActions,
     } = useGameLogic();
 
-    const startMatchFromStart = () => {
-        gameMiscActions.update(gameState.id as ReferenceTo<GameState>, {
+    const startMatchFromStart = async () => {
+        await gameMiscActions.update(gameState.id as ReferenceTo<GameState>, {
             matchStarted: true,
             currentGameNo: 0,
             currentGameStart: new Date(),
         });
     };
 
-    const startMatchFromNo = (no: number) => {
-        gameMiscActions.update(gameState.id as ReferenceTo<GameState>, {
+    const startMatchFromNo = async (no: number) => {
+        await gameMiscActions.update(gameState.id as ReferenceTo<GameState>, {
             matchStarted: true,
             currentGameNo: no,
             currentGameStart: new Date(),
         });
     };
 
-    const startGameNo = (no: number) => {
-        gameMiscActions.update(gameState.id as ReferenceTo<GameState>, {
+    const startGameNo = async (no: number) => {
+        await gameMiscActions.update(gameState.id as ReferenceTo<GameState>, {
             currentGameNo: no,
             currentGameStart: new Date(),
         });
@@ -68,13 +68,21 @@ export const useAdminLogic = () => {
             };
         }
 
-        gamesActions.update(game.id as ReferenceTo<Game>, gameObjChange);
-        playersActions.update(player.id as ReferenceTo<Player>, { goals: [...player.goals, theGoal.id] } as Partial<Player>);
+        await Promise.all([
+            gamesActions.update(game.id as ReferenceTo<Game>, gameObjChange),
+            playersActions.update(player.id as ReferenceTo<Player>, { goals: [...player.goals, theGoal.id] } as Partial<Player>),
+        ]);
     };
 
-    const savePoints = (team1: Team, team2: Team, newPoints1: number, newPoints2: number) => {
-        teamsActions.update(team1.id as ReferenceTo<Player>, { points: team1.points + newPoints1 } as Partial<Team>);
-        teamsActions.update(team2.id as ReferenceTo<Player>, { points: team2.points + newPoints2 } as Partial<Team>);
+    const savePoints = async (team1: Team, team2: Team, newPoints1: number, newPoints2: number) => {
+        await Promise.all([
+            teamsActions.update(team1.id as ReferenceTo<Player>, { points: team1.points + newPoints1 } as Partial<Team>),
+            teamsActions.update(team2.id as ReferenceTo<Player>, { points: team2.points + newPoints2 } as Partial<Team>),
+        ]);
+    };
+
+    const finishGame = async (game: Game) => {
+        await gamesActions.update(game.id as ReferenceTo<Game>, { finished: true } as Partial<Game>);
     };
 
     return {
@@ -83,5 +91,6 @@ export const useAdminLogic = () => {
         startGameNo,
         newGoal,
         savePoints,
+        finishGame,
     };
 };

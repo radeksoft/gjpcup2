@@ -19,6 +19,7 @@ export const AdminHomePage: React.FC = () => {
         teams,
         games,
         gameState,
+        currentGame,
         // startNextGame,
         // prevGame,
         // startMatch,
@@ -29,6 +30,7 @@ export const AdminHomePage: React.FC = () => {
         startMatchFromNo,
         startGameNo,
         savePoints,
+        finishGame,
     } = useAdminLogic();
 
     const [showGameNo, setShowGameNo] = useState(gameState.currentGameNo);
@@ -80,20 +82,17 @@ export const AdminHomePage: React.FC = () => {
         setShowGameNo(prev => prev - 1);
     };
 
-    const startNextGame = () => {
-        showNextGame();
-        startGameNo(showGameNo + 1);
+    const startCurrentGame = async () => {
+        await startGameNo(showGameNo);
     };
 
-    const startCurrentGame = () => {
-        startGameNo(showGameNo);
-    };
-
-    const saveStartNext = () => {
-        if (!team1 || !team2)
+    const saveStartNext = async () => {
+        if (!team1 || !team2 || !currentGame.game)
             return;
-        savePoints(team1, team2, newPoints1, newPoints2);
-        startNextGame();
+        await savePoints(team1, team2, newPoints1, newPoints2);
+        await finishGame(currentGame.game);
+        await startGameNo(showGameNo + 1);
+        showNextGame();
     }
 
     return (
