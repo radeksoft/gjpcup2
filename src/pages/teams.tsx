@@ -5,18 +5,24 @@ import { PAGE_STYLE, useGameLogic } from '../logic';
 export const TeamsPage: React.FC = () => {
     const {
         teams,
+        gameState,
     } = useGameLogic();
 
-    const teamsSorted = useMemo(() => {
-        return teams.sort((a, b) => a.no - b.no);
-    }, [teams]);
+    const teamsShown = useMemo(() => {
+        if (!gameState.revealTeachers) {
+            const withoutTeachers = teams.filter(t => !t.teachers);
+            return withoutTeachers.sort((a, b) => a.no - b.no);
+        } else {
+            return teams.sort((a, b) => a.no - b.no);
+        }
+    }, [teams, gameState]);
 
-    if (!teamsSorted || teamsSorted.length === 0)
+    if (!teamsShown || teamsShown.length === 0)
         return (<p>loading</p>);
 
     return (
         <div style={{width: '100%', maxWidth: 600}}>
-            {teamsSorted.map(team => (
+            {teamsShown.map(team => (
                 <TeamView team={team} key={team.name}/>
             ))}
         </div>

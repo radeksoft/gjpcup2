@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "filldb": "tsx --tsconfig ./tsconfig.node.json scripts/filldb.ts",
     "resetdb": "tsx --tsconfig ./tsconfig.node.json scripts/resetdb.ts",
-    "stats": "tsx --tsconfig ./tsconfig.node.json scripts/stats.ts"
+    "stats": "tsx --tsconfig ./tsconfig.node.json scripts/stats.ts",
+    "purgedb": "tsx --tsconfig ./tsconfig.node.json scripts/purgedb.ts"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
