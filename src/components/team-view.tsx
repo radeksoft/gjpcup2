@@ -12,6 +12,8 @@ type TeamProps = {
     team: Team,
 };
 
+const AMOGUS = '\u0d9e';
+
 export const TeamView: React.FC<TeamProps> = props => {
     const { players } = useGameLogic();
 
@@ -20,11 +22,23 @@ export const TeamView: React.FC<TeamProps> = props => {
     } = props;
 
     const members = useMemo(() => {
-        return players.filter(player => player.team === team.id).sort((a, b) => a.goals.length - b.goals.length);
+        return players.filter(player => player.team === team.id);
     }, [players, team.id]);
 
     const totalGoals = useMemo(() => {
         return members.map(m => m.goals.length).reduce((prev, curr) => prev + curr, 0);
+    }, [members]);
+
+    const membersShown = useMemo(() => {
+        const amogus = members.find(m => m.name === AMOGUS);
+        if (amogus && amogus.goals.length > 0) {
+            return [
+                ...members.filter(m => m.name !== AMOGUS).sort((a, b) => b.goals.length - a.goals.length),
+                amogus,
+            ];
+        } else {
+            return members.filter(m => m.name !== AMOGUS).sort((a, b) => b.goals.length - a.goals.length);
+        }
     }, [members]);
 
     return (
@@ -33,8 +47,8 @@ export const TeamView: React.FC<TeamProps> = props => {
             <Card.Body className='pb-0'>
                 <Table>
                     <tbody>
-                        {members.map((member, idx) => (
-                            <PlayerRow player={member} last={idx === members.length-1} key={member.id}/>
+                        {membersShown.map((member, idx) => (
+                            <PlayerRow player={member} last={idx === membersShown.length-1} key={member.id}/>
                         ))}
                     </tbody>
                     <tfoot>

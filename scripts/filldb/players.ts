@@ -22,6 +22,15 @@ export const createPlayers = async (parsedTeams: TeamWithRef[], pb: PocketBase) 
             });
             insertedRefs.push(inserted.id);
         }
+
+        // unknown member
+        const amogus = await playersColl.create({
+            name: '\u0d9e',
+            goals: [],
+            team: team.dbRef,
+        });
+        insertedRefs.push(amogus.id);
+
         updatedTeams.push({
             ...team,
             memberRefs: insertedRefs,

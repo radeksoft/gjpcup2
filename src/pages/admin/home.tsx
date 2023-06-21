@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { useAuth } from 'pocketbase-react/src';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
@@ -32,6 +33,8 @@ export const AdminHomePage: React.FC = () => {
         savePoints,
         finishGame,
     } = useAdminLogic();
+
+    const { actions } = useAuth();
 
     const [showGameNo, setShowGameNo] = useState(gameState.currentGameNo);
 
@@ -152,6 +155,7 @@ export const AdminHomePage: React.FC = () => {
                     </Table>
                 </Card>
             )}
+            <Button variant="danger" onClick={() => actions.signOut()}>log out</Button>
         </div>
     );
 };
