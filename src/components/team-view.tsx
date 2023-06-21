@@ -30,7 +30,7 @@ export const TeamView: React.FC<TeamProps> = props => {
     return (
         <Card className={team.teachers ? 'border border-warning border-4 my-3' : 'my-3'}>
             <Card.Header as="h5">{team.name}</Card.Header>
-            <Card.Body bg={team.teachers ? 'warning' : undefined} className='pb-0'>
+            <Card.Body className='pb-0'>
                 <Table>
                     <tbody>
                         {members.map((member, idx) => (
