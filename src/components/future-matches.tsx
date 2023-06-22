@@ -31,9 +31,9 @@ export const FutureMatches: React.FC<FutureMatchesProps> = props => {
         const offset = gameState.matchStarted ? 0 : 1;
 
         if (limit) {
-            return gamesToShow.filter(g => g.no+offset > gameState.currentGameNo).slice(0, limit);
+            return gamesToShow.filter(g => g.no+offset > gameState.currentGameNo).sort((a, b) => a.no - b.no).slice(0, limit);
         } else {
-            return gamesToShow.filter(g => g.no+offset > gameState.currentGameNo);
+            return gamesToShow.filter(g => g.no+offset > gameState.currentGameNo).sort((a, b) => a.no - b.no);
         }
     }, [games, gameState, limit]);
 
