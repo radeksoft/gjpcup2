@@ -74,7 +74,7 @@ const FutureMatch: React.FC<FutureMatchProps> = props => {
     }, [game, getTeamsByGame]);
 
     const gameStartFormatted = useMemo(() => {
-        const diff = game.no - gameState.currentGameNo;
+        const diff = game.no - gameState.currentGameNo - 1;
         const cloned = new Date(nextGameStart);
         cloned.setMinutes(cloned.getMinutes() + diff * gameState.gameDuration);
         const formatted = cloned.toLocaleTimeString('cs-cz', { hour: 'numeric', minute: '2-digit' });
