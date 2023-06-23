@@ -6,6 +6,7 @@ import './style.css';
 
 import { useAppContent } from 'pocketbase-react/src';
 import type { Game, GameState, Goal, News, Player, Team } from './types';
+import { AppFooter } from './components/app-footer';
 
 const serverURL = import.meta.env.VITE_POCKETBASE_ENDPOINT;
 // these get automatically prefetched & subscribed to updates
@@ -29,6 +30,7 @@ export const App: React.FC = () => {
                 <PocketbaseDataLoader>
                     <Router />
                 </PocketbaseDataLoader>
+                <AppFooter />
             </div>
         </PocketbaseProvider>
     );
