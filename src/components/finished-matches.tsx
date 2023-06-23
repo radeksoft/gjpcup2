@@ -14,7 +14,8 @@ export const FinishedMatches: React.FC = () => {
 
     const finishedGames = useMemo(() => {
         const filtered = games.filter(g => g.no < gameState.currentGameNo)
-        return filtered;
+        const sorted = filtered.sort((a, b) => a.no - b.no);
+        return sorted;
     }, [games, gameState]);
 
     if (!finishedGames || !finishedGames.length)
