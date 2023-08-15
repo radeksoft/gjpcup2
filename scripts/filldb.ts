@@ -24,6 +24,11 @@ if (!await confirm())
 const csv = fs.readFileSync('./tymy.csv', 'utf8');
 const teams = parseTeamsPlayers(csv);
 
+const rozpisyStr = fs.readFileSync('./rozpis', 'utf8');
+const rozpisy = rozpisyStr.split('\n');
+console.log({rozpisy});
+// process.exit(1);
+
 const pb = new PocketBase(POCKETBASE_ENDPOINT);
 await pb.admins.authWithPassword(POCKETBASE_ADMIN_EMAIL, POCKETBASE_ADMIN_PASSWORD);
 
@@ -37,7 +42,7 @@ await addMembersToTeams(updatedTeams, pb);
 
 const studentTeams = emptyTeams.filter(t => !t.teachers);
 
-const nextNo = await createGames(studentTeams, pb);
+const nextNo = await createGames(studentTeams, rozpisy, pb);
 
 const teachersTeam = emptyTeams.find(t => t.teachers);
 assert(teachersTeam);

@@ -9,6 +9,7 @@ import { GoalRow } from '../../components/goal-row';
 import { useGameLogic, PAGE_STYLE } from '../../logic';
 import { useAdminLogic } from '../../admin-logic';
 import { AdminGoalInput } from '../../components/admin/goal-input';
+import { FutureMatches } from '../../components/future-matches';
 
 const vsInlineStyle: React.CSSProperties = {
     marginTop: 'auto',
@@ -155,6 +156,7 @@ export const AdminHomePage: React.FC = () => {
                     </Table>
                 </Card>
             )}
+            <FutureMatches limit={6} />
             <Button variant="danger" onClick={() => actions.signOut()}>log out</Button>
         </div>
     );

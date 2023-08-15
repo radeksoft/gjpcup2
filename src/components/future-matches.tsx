@@ -31,9 +31,9 @@ export const FutureMatches: React.FC<FutureMatchesProps> = props => {
         const offset = gameState.matchStarted ? 0 : 1;
 
         if (limit) {
-            return gamesToShow.filter(g => g.no+offset > gameState.currentGameNo).slice(0, limit);
+            return gamesToShow.filter(g => g.no+offset > gameState.currentGameNo).sort((a, b) => a.no - b.no).slice(0, limit);
         } else {
-            return gamesToShow.filter(g => g.no+offset > gameState.currentGameNo);
+            return gamesToShow.filter(g => g.no+offset > gameState.currentGameNo).sort((a, b) => a.no - b.no);
         }
     }, [games, gameState, limit]);
 
@@ -74,7 +74,7 @@ const FutureMatch: React.FC<FutureMatchProps> = props => {
     }, [game, getTeamsByGame]);
 
     const gameStartFormatted = useMemo(() => {
-        const diff = game.no - gameState.currentGameNo;
+        const diff = game.no - gameState.currentGameNo - 1;
         const cloned = new Date(nextGameStart);
         cloned.setMinutes(cloned.getMinutes() + diff * gameState.gameDuration);
         const formatted = cloned.toLocaleTimeString('cs-cz', { hour: 'numeric', minute: '2-digit' });

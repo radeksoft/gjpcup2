@@ -15,7 +15,7 @@ console.log('Confirm with y<Enter>')
 if (!await confirm())
     process.exit(1);
 
-const TEACHERS_TEAM_ID = 'pg7a6r910fvfhlq';
+const TEACHERS_TEAM_ID = '2578hwt3ngdwr3b';
 
 const pb = new PocketBase(POCKETBASE_ENDPOINT);
 await pb.admins.authWithPassword(POCKETBASE_ADMIN_EMAIL, POCKETBASE_ADMIN_PASSWORD);
@@ -66,7 +66,7 @@ console.log('resetting gameState');
 await miscColl.update(gameState.id!, {
     currentGameNo: 0,
     matchStarted: false,
-    gameDuration: 6.5,
+    gameDuration: 8,
     currentGameStart: null,
     revealTeachers: false,
 });
